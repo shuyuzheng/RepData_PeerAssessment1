@@ -114,8 +114,16 @@ ggplot(stepPerDayFilled, aes(x = totalStep)) +
   ggtitle("Total Number of Steps Taken Each Day (after Imputation)")
 ```
 
+```{r}
+# Calculate mean and median total number of steps taken per day
+meanStepFilled <- mean(stepPerDayFilled$totalStep)
+medianStepFilled <- median(stepPerDayFilled$totalStep)
+```
+
 **Report:**  
-Imputation with _average steps taken each 5-interval_ cause 2 main changes on the estimates of the total daily number of steps, comparing with that in _part 1_:
+The **mean** of the total number of steps taken perday is `r format(meanStepFilled)`.  
+The **median** of the total number of steps taken perday is `r format(medianStepFilled)`.  
+Imputation with _average steps taken each 5-interval_ cause 2 main changes on the histogram of the total daily number of steps, comparing with that in _part 1_:
 
 1. The frequency of 0 steps for one day significantly decreased.
 2. The frequency of steps number among _10000~10250_ was changed.
@@ -136,10 +144,10 @@ myDataFilled$weekdays <- factor((weekdays(myDataFilled$date) %in% weekdays),
 
 ```{r}
 stepPerIntFilled <- myDataFilled %>% 
-  group_by(weekdays, interval) %>% 
+  group_by(interval, weekdays) %>% 
   summarize(averageStep = mean(steps))
 ggplot(myDataFilled, aes(x = interval, y = steps)) +
   geom_line() + 
-  facet_wrap(~weekdays)
+  facet_grid(weekdays~.)
 ```
 

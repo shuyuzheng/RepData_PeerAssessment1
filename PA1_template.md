@@ -46,7 +46,7 @@ ggplot(stepPerDay, aes(x = totalSteps)) +
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-83-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
 
 3. Calculate and report the mean and median of the total number of steps taken perday
 
@@ -78,7 +78,7 @@ ggplot(stepPerInterval, aes(x = interval, y = averageStep)) +
   ggtitle("Average Number of Steps Taken Each 5-minute Interval")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-85-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -136,17 +136,26 @@ ggplot(stepPerDayFilled, aes(x = totalStep)) +
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-89-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
+
+
+```r
+# Calculate mean and median total number of steps taken per day
+meanStepFilled <- mean(stepPerDayFilled$totalStep)
+medianStepFilled <- median(stepPerDayFilled$totalStep)
+```
 
 **Report:**  
-Imputation with _average steps taken each 5-interval_ cause 2 main changes on the estimates of the total daily number of steps, comparing with that in _part 1_:
+The **mean** of the total number of steps taken perday is 10766.19.  
+The **median** of the total number of steps taken per10766.19illed)`.  
+Imputation with _average steps taken each 5-interval_ cause 2 main changes on the histogram of the total daily number of steps, comparing with that in _part 1_:
 
 1. The frequency of 0 steps for one day significantly decreased.
 2. The frequency of steps number among _10000~10250_ was changed.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
+1. Create a new factor variable in the dataset with two levels <U+9225><U+FFFD> <U+9225><U+6E28>eekday<U+9225><U+FFFD> and <U+9225><U+6E28>eekend<U+9225><U+FFFD> indicating whether a given date is a weekday or weekend day.
 
 
 ```r
@@ -161,12 +170,12 @@ myDataFilled$weekdays <- factor((weekdays(myDataFilled$date) %in% weekdays),
 
 ```r
 stepPerIntFilled <- myDataFilled %>% 
-  group_by(weekdays, interval) %>% 
+  group_by(interval, weekdays) %>% 
   summarize(averageStep = mean(steps))
 ggplot(myDataFilled, aes(x = interval, y = steps)) +
   geom_line() + 
-  facet_wrap(~weekdays)
+  facet_grid(weekdays~.)
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-91-1.png)<!-- -->
+![](PA1_template_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
