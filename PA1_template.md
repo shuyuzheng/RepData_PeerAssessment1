@@ -147,7 +147,8 @@ medianStepFilled <- median(stepPerDayFilled$totalStep)
 
 **Report:**  
 The **mean** of the total number of steps taken perday is 10766.19.  
-The **median** of the total number of steps taken per10766.19illed)`.  
+The **median** of the total number of steps taken perday 
+is 10766.19.  
 Imputation with _average steps taken each 5-interval_ cause 2 main changes on the histogram of the total daily number of steps, comparing with that in _part 1_:
 
 1. The frequency of 0 steps for one day significantly decreased.
@@ -155,7 +156,7 @@ Imputation with _average steps taken each 5-interval_ cause 2 main changes on th
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-1. Create a new factor variable in the dataset with two levels <U+9225><U+FFFD> <U+9225><U+6E28>eekday<U+9225><U+FFFD> and <U+9225><U+6E28>eekend<U+9225><U+FFFD> indicating whether a given date is a weekday or weekend day.
+1. Create a new factor variable in the dataset with two levels - "weekday" and "weekend" - indicating whether a given date is a weekday or weekend day.
 
 
 ```r
